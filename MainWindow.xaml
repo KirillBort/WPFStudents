@@ -1,0 +1,45 @@
+﻿<Window x:Class="WPFStudents.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFStudents"
+        mc:Ignorable="d"
+        x:Name="_window"
+        Title="MainWindow" Height="450" Width="1000.108">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Path=Students}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="StudentId" Width="70" Binding="{Binding Path=Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="StudentFirstName" Width="120" Binding="{Binding Path=FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="StudentLastName" Width="130" Binding="{Binding Path=LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="StudentMiddleName" Width="150" Binding="{Binding Path=MiddleName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="StudentPayment" Width="100" Binding="{Binding Path=Payment}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="DeleteStudent">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding DataContext.DeleteStudentCommand, ElementName=_window}" CommandParameter="{Binding}">Delete</Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column ="1">
+            <Label Content="StudentFirstName"/>
+            <TextBox Text="{Binding Path=FirstName}" IsReadOnly="True"/>
+            <Label Content="StudentLastName"/>
+            <TextBox Text="{Binding Path=LastName}" IsReadOnly="True"/>
+            <Label Content="StudentMiddleName"/>
+            <TextBox Text="{Binding Path=MiddleName}" IsReadOnly="True"/>
+            <Label Content="StudentPayment"/>
+            <TextBox Text="{Binding Path=Payment}" IsReadOnly="True"/>
+            <Button Content="AddRandomStudent" Height="20" HorizontalAlignment="Left" Margin="20,220,0,0" Width="120" Command="{Binding Path=AddStudentCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
