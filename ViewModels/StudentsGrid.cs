@@ -9,6 +9,16 @@ namespace WPFStudents.ViewModels
 {
     class StudentsGrid : INotifyPropertyChangedBase
     {
+        private Student _currentStudent;
+        public Student CurrentStudent
+        {
+            get { return _currentStudent; }
+            set
+            {
+                _currentStudent = value;
+                NotifyPropertyChanged(nameof(CurrentStudent));
+            }
+        }
         public ObservableCollection<Student> Students { get; set; }
         public StudentsGrid()
         {
@@ -21,7 +31,7 @@ namespace WPFStudents.ViewModels
         public void GenerateStudent()
         {
             var random = new Random();
-            Students.Add(new Student() { Id = ++CuttentId, FirstName = StudentsFirstName[random.Next(0, 3)], LastName = StudentsLastName[random.Next(0, 3)], MiddleName = StudentsMiddleName[random.Next(0, 3)], Payment = random.Next(3000) });
+            Students.Add(new Student() { Id = ++CuttentId, FirstName = StudentsFirstName[random.Next(0, 3)], LastName = StudentsLastName[random.Next(0, 3)], MiddleName = StudentsMiddleName[random.Next(0, 3)], Payment = random.Next(2000, 3000) });
             NotifyPropertyChanged(nameof(Students));
         }
         public ICommand AddStudentCommand => new RelayCommand(
